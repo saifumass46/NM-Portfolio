@@ -197,6 +197,126 @@
       transform: scale(1.1);
       background: linear-gradient(to right, #4506c5, #8a0404);
     }
+
+    :root {
+      --bg: #0f0f12;
+      --panel: #1a1b21;
+      --text: #e9e9ee;
+      --muted: #a8a8b3;
+      --brand: #ff8a00;
+      --radius: 16px;
+      --shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    }
+
+    .skills {
+      background: var(--bg);
+      padding: 64px 20px;
+    }
+
+    .skills__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .skills__title {
+      text-align: center;
+      color: var(--brand);
+      letter-spacing: .06em;
+      font-size: clamp(24px, 3.2vw, 36px);
+      margin: 0 0 28px;
+      font-weight: 800;
+    }
+
+    .skills__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    /* Stack nicely on small screens */
+    @media (max-width: 900px) {
+      .skills__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .skills__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill {
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 22px;
+    }
+
+    .skill__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .skill h3 {
+      color: var(--text);
+      font-size: 16px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .skill__val {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .skill__bar {
+      position: relative;
+      height: 12px;
+      background: #2a2b33;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill__fill {
+      --val: 0%;
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--val);
+      border-radius: inherit;
+      /* gradient like your screenshot */
+      background: linear-gradient(90deg, #ff8a00, #ffb000);
+      /* Smooth reveal on load */
+      transform: translateZ(0);
+      /* enable GPU */
+      animation: fill 1.1s ease forwards;
+    }
+
+    /* Individual gradient accents per card (optional) */
+    .skill:nth-child(2) .skill__fill {
+      background: linear-gradient(90deg, #2db9ff, #58d1ff);
+    }
+
+    .skill:nth-child(3) .skill__fill {
+      background: linear-gradient(90deg, #f6b94a, #ffc96d);
+    }
+
+    .skill:nth-child(4) .skill__fill {
+      background: linear-gradient(90deg, #8a2be2, #b06cff);
+    }
+
+    @keyframes fill {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: var(--val);
+      }
+    }
   </style>
 </head>
 
@@ -231,7 +351,7 @@
       <img src="Pro.jpeg" alt="my profile">
       <p>
         I am a student enthusiastic about technology and design.<br>
-        I love building interactive, user-friendly web applications<br> 
+        I love building interactive, user-friendly web applications<br>
         and exploring new tools in the tech world.
       </p>
     </div>
@@ -252,6 +372,61 @@
       <div class="project-card">
         <h3>Project 3</h3>
         <p>Whether app using open whether API and JS.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Sec -->
+
+  <section id="skills" class="skills">
+    <div class="skills__inner">
+      <h2 class="skills__title">MY SKILLS</h2>
+
+      <div class="skills__grid">
+        <!-- Skill Card -->
+        <article class="skill">
+          <header class="skill__head">
+            <h3>HTML</h3>
+            <span class="skill__val" aria-hidden="true">90%</span>
+          </header>
+          <div class="skill__bar" role="progressbar" aria-label="HTML skill level" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="90">
+            <span class="skill__fill" style="--val:90%"></span>
+          </div>
+        </article>
+
+        <article class="skill">
+          <header class="skill__head">
+            <h3>CSS</h3>
+            <span class="skill__val" aria-hidden="true">80%</span>
+          </header>
+          <div class="skill__bar" role="progressbar" aria-label="CSS skill level" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="80">
+            <span class="skill__fill" style="--val:80%"></span>
+          </div>
+        </article>
+
+        <article class="skill">
+          <header class="skill__head">
+            <h3>JavaScript</h3>
+            <span class="skill__val" aria-hidden="true">75%</span>
+          </header>
+          <div class="skill__bar" role="progressbar" aria-label="JavaScript skill level" aria-valuemin="0"
+            aria-valuemax="100" aria-valuenow="75">
+            <span class="skill__fill" style="--val:75%"></span>
+          </div>
+        </article>
+
+        <article class="skill">
+          <header class="skill__head">
+            <h3>Photoshop</h3>
+            <span class="skill__val" aria-hidden="true">60%</span>
+          </header>
+          <div class="skill__bar" role="progressbar" aria-label="Photoshop skill level" aria-valuemin="0"
+            aria-valuemax="100" aria-valuenow="60">
+            <span class="skill__fill" style="--val:60%"></span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -281,7 +456,7 @@
     const backToTopButton = document.getElementById("back-to-top");
 
     // Show button when user scrolls down 300px from the top
-    window.onscroll = function() {
+    window.onscroll = function () {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         backToTopButton.style.display = "block";
       } else {
@@ -290,7 +465,7 @@
     };
 
     // Scroll to top when button is clicked
-    backToTopButton.addEventListener("click", function() {
+    backToTopButton.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
